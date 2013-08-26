@@ -1,0 +1,105 @@
+
+
+<div class="pure-g-r" id="layout">
+    <div class="sidebar pure-u">
+        <header class="header">
+            <hgroup>
+                <h1 class="brand-title">A Sample Blog</h1>
+                <h2 class="brand-tagline">Creating a blog layout using Pure</h2>
+
+                <h1 class="content-subhead">Settings</h1>
+                Infinite Scroll
+                <div class='switch'>
+                    <div class='overlay'></div>
+                    <span class='switched'></span>
+                    <input type='checkbox' name='opt1' id='opt1' value='1' class='toggleswitch' checked='checked' />
+                </div>
+            </hgroup>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button" href="http://purecss.io">Pure</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="http://yuilibrary.com">YUI Library</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <div class="pure-u-1">
+        <div class="content">
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 class="content-subhead">Pinned Post</h1>
+
+                <section class="post">
+                    <header class="post-header">
+                        <img class="post-avatar" alt="Tilo Mitra's avatar" src="" height="48" width="48">
+
+                        <h2 class="post-title">Introducing Pure</h2>
+
+                        <p class="post-meta">
+                            By <a href="#" class="post-author">Tilo Mitra</a> under <a class="post-category post-category-design" href="#">CSS</a> <a class="post-category post-category-pure" href="#">Pure</a>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            Yesterday at CSSConf, we launched Pure – a new CSS library. Phew! Here are the <a href="https://speakerdeck.com/tilomitra/pure-bliss">slides from the presentation</a>. Although it looks pretty minimalist, we’ve been working on Pure for several months. After many iterations, we have released Pure as a set of small, responsive, CSS modules that you can use in every web project.
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="posts">
+                <h1 class="content-subhead">Recent Posts</h1>
+
+                <% @comics.each do |comic| %>
+                  <% if comic.description.blank? %>
+                  <section class="post" style="padding-bottom: 4em !important;">
+                  <% else %>
+                  <section class="post">
+                  <% end %>
+                      <header class="post-header">
+                        <img class="post-avatar" src="<%= comic.image_url %>" alt="<%= comic.title.html_safe %>" height="48" width="48">
+
+                        <h2 class="post-title"><%= comic.title.html_safe %></h2>
+
+                        <p class="post-meta">
+                            On <%= comic.created_at %>
+                        </p>
+                      </header>
+
+                      <div class="post-description">
+                        <p>
+                            <%= comic.description.html_safe %>
+                        </p>
+                      </div>
+                      <a class="pure-button" href="<%= comic.link %>">
+                        <i class="icon-download-alt icon-large"></i>
+                        Download (LaFile)
+                      </a>
+                  </section>
+                <% end %>
+
+            </div>
+
+            <%= will_paginate @comics %>
+
+            <footer class="footer">
+                <div class="pure-menu pure-menu-horizontal pure-menu-open">
+                    <ul>
+                        <li><a href="http://purecss.io/">Contact Us</a></li>
+                        <li><a href="http://purecss.io/">About</a></li>
+                        <li><a href="http://github.com/yui/pure/">Advertise</a></li>
+                        <li><a href="http://twitter.com/yuilibrary/">Twitter</a></li>
+                        <li><a href="http://github.com/yui/pure/">Github</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
