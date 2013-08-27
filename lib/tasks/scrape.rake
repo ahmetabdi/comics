@@ -54,7 +54,7 @@ namespace :scrape do
         #tags
         tags = comics.at_xpath('//*[@id="dle-content"]/div[1]/div[4]').content
         #images
-        images = ""
+        images = []
         comics.at_xpath('//*[@id="dle-content"]/div[1]').search('img').map {|a| a['src'] }.each_with_index do |image, index|
           if index == 1
             break
@@ -68,9 +68,7 @@ namespace :scrape do
           next
         else
           puts "Creating: #{title}"
-          co = Comic.new(title: title, link: link, description: content, tags: tags, category: @category, year: @year, format: @format, pictures: @pictures, language: @language, size: @size)
-
-          co.remote_image_url = images
+          co = Comic.new(title: title, link: link, images: images,description: content, tags: tags, category: @category, year: @year, format: @format, pictures: @pictures, language: @language, size: @size)
 
           co.save!
         end

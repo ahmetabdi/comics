@@ -18,6 +18,7 @@ gem 'annotate'
 gem 'carrierwave'
 gem 'protected_attributes'
 gem 'will_paginate'
+gem 'pg'
 #run annotate
 
 group :doc do

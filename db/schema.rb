@@ -11,22 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130825191718) do
+ActiveRecord::Schema.define(version: 20130827204557) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "comics", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.text     "tags"
-    t.text     "category"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "link"
     t.string   "year"
     t.string   "format"
     t.string   "pictures"
     t.string   "language"
     t.string   "size"
-    t.string   "image"
+    t.string   "tags",        default: [], array: true
+    t.string   "category",    default: [], array: true
+    t.string   "images",      default: [], array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
