@@ -11,7 +11,9 @@ namespace :scrape do
 
     Comic.delete_all
 
-    567.downto(1).each do |i|
+    max_page = Nokogiri::HTML(open("http://comicsall.org/")).at_xpath('//*[@id="dle-content"]/div[16]/span[2]/a[10]').content.to_i
+
+    max_page.downto(1).each do |i|
 
     doc = Nokogiri::HTML(open("http://comicsall.org/page/#{i}/"))
 
