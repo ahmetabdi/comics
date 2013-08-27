@@ -9,7 +9,10 @@ namespace :scrape do
   task :comics do
     p 'Scraping comicsall.org'
 
-    (1..567).each do |i|
+    Comic.delete_all
+
+    567.downto(1).each do |i|
+
     doc = Nokogiri::HTML(open("http://comicsall.org/page/#{i}/"))
 
       doc.css('.story > .sfoot > .radius2 > .argmore').each do |link|
@@ -55,11 +58,13 @@ namespace :scrape do
         tags = comics.at_xpath('//*[@id="dle-content"]/div[1]/div[4]').content
         #images
         images = []
+        main_image = ""
         comics.at_xpath('//*[@id="dle-content"]/div[1]').search('img').map {|a| a['src'] }.each_with_index do |image, index|
-          if index == 1
-            break
+          if index == 0
+            main_image << image
+          else
+            images << image
           end
-          images << image
         end
 
         #If the comic exists skip it
@@ -68,7 +73,9 @@ namespace :scrape do
           next
         else
           puts "Creating: #{title}"
-          co = Comic.new(title: title, link: link, images: images,description: content, tags: tags, category: @category, year: @year, format: @format, pictures: @pictures, language: @language, size: @size)
+          co = Comic.new(title: title, link: link, images: images, description: content, tags: tags, category: @category, year: @year, format: @format, pictures: @pictures, language: @language, size: @size)
+
+          co.remote_main_image_url = main_image
 
           co.save!
         end

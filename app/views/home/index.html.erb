@@ -8,12 +8,6 @@
                 <h2 class="brand-tagline">Creating a blog layout using Pure</h2>
 
                 <h1 class="content-subhead">Settings</h1>
-                Infinite Scroll
-                <div class='switch'>
-                    <div class='overlay'></div>
-                    <span class='switched'></span>
-                    <input type='checkbox' name='opt1' id='opt1' value='1' class='toggleswitch' checked='checked' />
-                </div>
             </hgroup>
 
             <nav class="nav">
@@ -64,7 +58,7 @@
                   <section class="post">
                   <% end %>
                       <header class="post-header">
-                        <img class="post-avatar" src="<%= comic.image_url %>" alt="<%= comic.title.html_safe %>" height="48" width="48">
+                        <img class="post-avatar" src="<%= comic.main_image %>" alt="<%= comic.title.html_safe %>" height="48" width="48">
 
                         <h2 class="post-title"><%= comic.title.html_safe %></h2>
 
